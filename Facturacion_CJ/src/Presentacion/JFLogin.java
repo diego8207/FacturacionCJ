@@ -1,9 +1,9 @@
-package Vista;
+package Presentacion;
 
-import Modelo.Usuario;
+
+import Datos.Usuario;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class JFLogin extends javax.swing.JFrame {
