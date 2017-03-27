@@ -92,7 +92,9 @@ public class JFLogin extends javax.swing.JFrame {
         if (us == null) {
             JOptionPane.showMessageDialog(this, "Usuario no encontrado o datos incorrectos");
         } else {
-            
+            frmInicio inicio = new frmInicio();
+            this.dispose();
+            inicio.show();
 
         }
     }//GEN-LAST:event_btnIngresarActionPerformed

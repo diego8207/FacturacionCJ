@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  */
 public class conexion {
     public String db        = "db_facturacion_cj";
-    public String url       = "jdbc:mysql://localhost/" + db;
+    public String url       = "jdbc:mysql://localhost:3307/" + db;
     public String user      = "root";
     public String pass      = "root"; 
 
