@@ -15,6 +15,10 @@ import javax.swing.JOptionPane;
  * @author Diego Velez
  */
 public class conexion {
+//    public String db        = "macrosys_facturacion_cj";
+//    public String url       = "jdbc:mysql://72.29.73.51:3306/" + db;
+//    public String user      = "macrosys_facturacion_cj";
+//    public String pass      = "@Max14396183"; 
     public String db        = "db_facturacion_cj";
     public String url       = "jdbc:mysql://localhost:3307/" + db;
     public String user      = "root";

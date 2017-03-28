@@ -30,7 +30,7 @@ public class fProducto {
         String [] registro = new String[5];
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
-        sSQL = "select * from producto where NOMBRE_PRODUCTO like '%" + buscar + "%' order by IDPRODUCTO";
+        sSQL = "select * from PRODUCTO where NOMBRE_PRODUCTO like '%" + buscar + "%' order by IDPRODUCTO";
         
         try {
             Statement st = cn.createStatement();
@@ -56,15 +56,14 @@ public class fProducto {
     }
     
     public boolean insertar(Producto producto){
-        sSQL = "insert into producto (idproducto, nombre_producto, talla, precio_venta_producto, descripcion) "
-                + "values (?,?,?,?,?)";
+        sSQL = "insert into PRODUCTO (NOMBRE_PRODUCTO, TALLA, PRECIO_VENTA_PRODUCTO, DESCRIPCION) "
+                + "values (?,?,?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setInt(1, producto.getIDPRODUCTO());
-            pst.setString(2, producto.getNOMBRE_PRODUCTO());
-            pst.setString(3, producto.getTALLA());
-            pst.setInt(4, producto.getPRECIO_VENTA_PRODUCTO());
-            pst.setString(5, producto.getDESCRIPCION());
+            pst.setString(1, producto.getNOMBRE_PRODUCTO());
+            pst.setString(2, producto.getTALLA());
+            pst.setInt(3, producto.getPRECIO_VENTA_PRODUCTO());
+            pst.setString(4, producto.getDESCRIPCION());
             
             int n = pst.executeUpdate();
             
@@ -83,8 +82,8 @@ public class fProducto {
     
     
     public boolean editar(Producto producto){
-        sSQL = "update producto set nombre_producto = ?, talla = ?, precio_venta_producto = ?, descripcion = ?" +
-                " where idproducto = ?";
+        sSQL = "update PRODUCTO set NOMBRE_PRODUCTO = ?, TALLA = ?, PRECIO_VENTA_PRODUCTO = ?, DESCRIPCION = ?" +
+                " where IDPRODUCTO = ?";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             
@@ -108,7 +107,7 @@ public class fProducto {
     }
     
     public boolean eliminar(Producto producto){
-        sSQL = "delete from producto where idproducto = ?";
+        sSQL = "delete from PRODUCTO where IDPRODUCTO = ?";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             pst.setInt(1, producto.getIDPRODUCTO());

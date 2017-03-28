@@ -9,28 +9,29 @@ package Datos;
  *
  * @author Diego Velez
  */
-public class Cliente {
+public class Cliente extends Persona{
+    
     private String CODIGO_CLIENTE;
-    private String IDPERSONA;
     private String DESCUENTO;
 
     public Cliente() {
     }
 
+    public Cliente(String CODIGO_CLIENTE, String DESCUENTO) {
+        this.CODIGO_CLIENTE = CODIGO_CLIENTE;
+        this.DESCUENTO = DESCUENTO;
+    }
+    
+    
+
+    @Override
     public String getCODIGO_CLIENTE() {
         return CODIGO_CLIENTE;
     }
 
+    @Override
     public void setCODIGO_CLIENTE(String CODIGO_CLIENTE) {
         this.CODIGO_CLIENTE = CODIGO_CLIENTE;
-    }
-
-    public String getIDPERSONA() {
-        return IDPERSONA;
-    }
-
-    public void setIDPERSONA(String IDPERSONA) {
-        this.IDPERSONA = IDPERSONA;
     }
 
     public String getDESCUENTO() {

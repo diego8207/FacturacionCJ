@@ -93,6 +93,16 @@ public class frmInicio extends javax.swing.JFrame {
         mnuClientes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Cliente de empresa-32.png"))); // NOI18N
         mnuClientes.setMnemonic('y');
         mnuClientes.setText("Clientes");
+        mnuClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuClientesMouseClicked(evt);
+            }
+        });
+        mnuClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuClientesActionPerformed(evt);
+            }
+        });
         editMenu.add(mnuClientes);
 
         menuBar.add(editMenu);
@@ -180,6 +190,18 @@ public class frmInicio extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_MnuSalirMouseClicked
+
+    private void mnuClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuClientesMouseClicked
+        
+    }//GEN-LAST:event_mnuClientesMouseClicked
+
+    private void mnuClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuClientesActionPerformed
+        frmCliente cliente = new frmCliente();
+        centrarVentanaInterna(cliente);
+        //Bloquea el JInternalFrame para que no se mueva dentro del Escritorio
+        //el metodo hay que sobre escribirlo en este caso en la clase frmProducto
+        cliente.setLocked(true);
+    }//GEN-LAST:event_mnuClientesActionPerformed
 
     /**
      * @param args the command line arguments
