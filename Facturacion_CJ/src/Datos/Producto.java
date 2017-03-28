@@ -11,10 +11,11 @@ package Datos;
  */
 public class Producto {
     private int IDPRODUCTO;
+    private int IDCATEGORIA;
     private String NOMBRE_PRODUCTO;
-    private String TALLA;
+    private String CODIGO_PRODUCTO;
     private int PRECIO_VENTA_PRODUCTO;
-    private String DESCRIPCION;
+    private int LINEA_PRODUCTO;
 
     public Producto() {
     }
@@ -27,6 +28,14 @@ public class Producto {
         this.IDPRODUCTO = IDPRODUCTO;
     }
 
+    public int getIDCATEGORIA() {
+        return IDCATEGORIA;
+    }
+
+    public void setIDCATEGORIA(int IDCATEGORIA) {
+        this.IDCATEGORIA = IDCATEGORIA;
+    }
+
     public String getNOMBRE_PRODUCTO() {
         return NOMBRE_PRODUCTO;
     }
@@ -35,12 +44,12 @@ public class Producto {
         this.NOMBRE_PRODUCTO = NOMBRE_PRODUCTO;
     }
 
-    public String getTALLA() {
-        return TALLA;
+    public String getCODIGO_PRODUCTO() {
+        return CODIGO_PRODUCTO;
     }
 
-    public void setTALLA(String TALLA) {
-        this.TALLA = TALLA;
+    public void setCODIGO_PRODUCTO(String CODIGO_PRODUCTO) {
+        this.CODIGO_PRODUCTO = CODIGO_PRODUCTO;
     }
 
     public int getPRECIO_VENTA_PRODUCTO() {
@@ -51,13 +60,12 @@ public class Producto {
         this.PRECIO_VENTA_PRODUCTO = PRECIO_VENTA_PRODUCTO;
     }
 
-    public String getDESCRIPCION() {
-        return DESCRIPCION;
+    public int getLINEA_PRODUCTO() {
+        return LINEA_PRODUCTO;
     }
 
-    public void setDESCRIPCION(String DESCRIPCION) {
-        this.DESCRIPCION = DESCRIPCION;
+    public void setLINEA_PRODUCTO(int LINEA_PRODUCTO) {
+        this.LINEA_PRODUCTO = LINEA_PRODUCTO;
     }
-    
-    
+ 
 }

@@ -25,9 +25,9 @@ public class fProducto {
     
     public DefaultTableModel mostrar(String buscar){
         DefaultTableModel modelo;
-        
-        String [] titulos = {"ID", "NOMBRE", "TALLA", "PRECIO DE VENTA", "DESCRIPCION"};
-        String [] registro = new String[5];
+        fcategoria_producto fcateg = new fcategoria_producto();
+        String [] titulos = {"ID", "CATEGORIA", "NOMBRE", "CODIGO", "PRECIO DE VENTA", "LINEA"};
+        String [] registro = new String[6];
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
         sSQL = "select * from PRODUCTO where NOMBRE_PRODUCTO like '%" + buscar + "%' order by IDPRODUCTO";
@@ -38,10 +38,13 @@ public class fProducto {
             
             while (rs.next()) {                
                 registro [0] = rs.getString("IDPRODUCTO");
-                registro [1] = rs.getString("NOMBRE_PRODUCTO");
-                registro [2] = rs.getString("TALLA");
-                registro [3] = rs.getString("PRECIO_VENTA_PRODUCTO");
-                registro [4] = rs.getString("DESCRIPCION");
+                
+                registro [1] = fcateg.consultarNombreCateg(rs.getInt("IDCATEGORIA"));
+                
+                registro [2] = rs.getString("NOMBRE_PRODUCTO");
+                registro [3] = rs.getString("CODIGO_PRODUCTO");
+                registro [4] = rs.getString("PRECIO_VENTA_PRODUCTO");
+                registro [5] = rs.getString("LINEA_PRODUCTO");
                 
                 totalregistros = totalregistros + 1;
                
@@ -56,14 +59,15 @@ public class fProducto {
     }
     
     public boolean insertar(Producto producto){
-        sSQL = "insert into PRODUCTO (NOMBRE_PRODUCTO, TALLA, PRECIO_VENTA_PRODUCTO, DESCRIPCION) "
-                + "values (?,?,?,?)";
+        sSQL = "insert into PRODUCTO (IDCATEGORIA, NOMBRE_PRODUCTO, CODIGO_PRODUCTO, PRECIO_VENTA_PRODUCTO, LINEA_PRODUCTO) "
+                + "values (?,?,?,?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setString(1, producto.getNOMBRE_PRODUCTO());
-            pst.setString(2, producto.getTALLA());
-            pst.setInt(3, producto.getPRECIO_VENTA_PRODUCTO());
-            pst.setString(4, producto.getDESCRIPCION());
+            pst.setInt(1, producto.getIDCATEGORIA());
+            pst.setString(2, producto.getNOMBRE_PRODUCTO());
+            pst.setString(3, producto.getCODIGO_PRODUCTO());
+            pst.setInt(4, producto.getPRECIO_VENTA_PRODUCTO());
+            pst.setInt(5, producto.getLINEA_PRODUCTO());
             
             int n = pst.executeUpdate();
             
@@ -82,16 +86,17 @@ public class fProducto {
     
     
     public boolean editar(Producto producto){
-        sSQL = "update PRODUCTO set NOMBRE_PRODUCTO = ?, TALLA = ?, PRECIO_VENTA_PRODUCTO = ?, DESCRIPCION = ?" +
+        sSQL = "update PRODUCTO set IDCATEGORIA = ?, NOMBRE_PRODUCTO = ?, CODIGO_PRODUCTO = ?, PRECIO_VENTA_PRODUCTO = ?, LINEA_PRODUCTO = ?" +
                 " where IDPRODUCTO = ?";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             
-            pst.setString(1, producto.getNOMBRE_PRODUCTO());
-            pst.setString(2, producto.getTALLA());
-            pst.setInt(3, producto.getPRECIO_VENTA_PRODUCTO());
-            pst.setString(4, producto.getDESCRIPCION());
-            pst.setInt(5, producto.getIDPRODUCTO());
+            pst.setInt(1, producto.getIDCATEGORIA());
+            pst.setString(2, producto.getNOMBRE_PRODUCTO());
+            pst.setString(3, producto.getCODIGO_PRODUCTO());
+            pst.setInt(4, producto.getPRECIO_VENTA_PRODUCTO());
+            pst.setInt(5, producto.getLINEA_PRODUCTO());
+            pst.setInt(6, producto.getIDPRODUCTO());
             
             int n = pst.executeUpdate();
             
@@ -125,5 +130,7 @@ public class fProducto {
             return false;
         }
     }
+    
+    
             
 }
