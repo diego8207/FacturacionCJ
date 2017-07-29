@@ -16,6 +16,7 @@ public class Producto {
     private String CODIGO_PRODUCTO;
     private int PRECIO_VENTA_PRODUCTO;
     private int LINEA_PRODUCTO;
+    private int STOCK;
 
     public Producto() {
     }
@@ -66,6 +67,14 @@ public class Producto {
 
     public void setLINEA_PRODUCTO(int LINEA_PRODUCTO) {
         this.LINEA_PRODUCTO = LINEA_PRODUCTO;
+    }
+
+    public int getSTOCK() {
+        return STOCK;
+    }
+
+    public void setSTOCK(int STOCK) {
+        this.STOCK = STOCK;
     }
  
 }

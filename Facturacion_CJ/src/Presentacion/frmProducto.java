@@ -74,7 +74,8 @@ public class frmProducto extends javax.swing.JInternalFrame {
         txtprecio_venta.setEnabled(false);
         chbxLinea.setEnabled(false);
         cmbCategoria.setEnabled(false);
-
+        txtstock.setEnabled(false);
+        
         btnGuardar.setText("Guardar");
         btnGuardar.setEnabled(false);
         btnCancelar.setEnabled(false);
@@ -96,6 +97,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
         txtprecio_venta.setEnabled(true);
         chbxLinea.setEnabled(true);
         cmbCategoria.setEnabled(true);
+        txtstock.setEnabled(true);
 
         btnGuardar.setEnabled(true);
         btnCancelar.setEnabled(true);
@@ -151,6 +153,8 @@ public class frmProducto extends javax.swing.JInternalFrame {
         chbxLinea = new javax.swing.JCheckBox();
         jLabel8 = new javax.swing.JLabel();
         txtcodigoproducto = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtstock = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         txtBuscarProducto = new javax.swing.JTextField();
@@ -245,6 +249,15 @@ public class frmProducto extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setText("STOCK");
+
+        txtstock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtstockActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -269,7 +282,6 @@ public class frmProducto extends javax.swing.JInternalFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(cmbCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chbxLinea)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addGroup(jPanel1Layout.createSequentialGroup()
                                             .addComponent(jLabel8)
@@ -279,16 +291,24 @@ public class frmProducto extends javax.swing.JInternalFrame {
                                     .addComponent(txtcodigoproducto)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addContainerGap()
-                                .addComponent(jLabel5)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel9)
+                                    .addComponent(jLabel5))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtprecio_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtprecio_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(txtstock, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(chbxLinea)))
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(0, 39, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(24, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtid_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
@@ -309,8 +329,11 @@ public class frmProducto extends javax.swing.JInternalFrame {
                     .addComponent(txtprecio_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
-                .addComponent(chbxLinea)
-                .addGap(48, 48, 48)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtstock, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chbxLinea))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNuevo, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -490,7 +513,12 @@ public class frmProducto extends javax.swing.JInternalFrame {
         }
         if (txtprecio_venta.getText().length() == 0) {
             JOptionPane.showConfirmDialog(rootPane, "Debes ingresar precio de venta del producto");
-            txtcodigoproducto.requestFocus();
+            txtprecio_venta.requestFocus();
+            return;
+        }
+        if (txtstock.getText().length() == 0) {
+            JOptionPane.showConfirmDialog(rootPane, "Debes ingresar stock del producto");
+            txtstock.requestFocus();
             return;
         }
 
@@ -503,7 +531,9 @@ public class frmProducto extends javax.swing.JInternalFrame {
         String categ_selec = cmbCategoria.getSelectedItem().toString();
         
         try {
-            producto.setIDCATEGORIA(cmbCategoria.getSelectedIndex());
+//            consultar id de la categoria seleccionada
+            int idcat = fcat.obtenerIdCategoria(categ_selec);
+            producto.setIDCATEGORIA(idcat);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e);
         }
@@ -511,6 +541,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
         producto.setNOMBRE_PRODUCTO(txtnombre_producto.getText());
         producto.setCODIGO_PRODUCTO(txtcodigoproducto.getText());
         producto.setPRECIO_VENTA_PRODUCTO(Integer.parseInt(txtprecio_venta.getText()));
+        producto.setSTOCK(Integer.parseInt(txtstock.getText()));
 
         //validamos el checkbox de Linea
         if (chbxLinea.isSelected()) {
@@ -582,14 +613,20 @@ public class frmProducto extends javax.swing.JInternalFrame {
         txtprecio_venta.setText(tblListado.getValueAt(fila, 4).toString());
         String bandera = tblListado.getValueAt(fila, 5).toString();
         
+        
         if( bandera.equals("0")){
             chbxLinea.setSelected(false);
         }else{
             chbxLinea.setSelected(true);
         }
-
+        
+        txtstock.setText(tblListado.getValueAt(fila, 6).toString());
 
     }//GEN-LAST:event_tblListadoMouseClicked
+
+    private void txtstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtstockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtstockActionPerformed
 
     /**
      * @param args the command line arguments
@@ -641,6 +678,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
@@ -651,5 +689,6 @@ public class frmProducto extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtid_producto;
     private javax.swing.JTextField txtnombre_producto;
     private javax.swing.JTextField txtprecio_venta;
+    private javax.swing.JTextField txtstock;
     // End of variables declaration//GEN-END:variables
 }

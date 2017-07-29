@@ -26,8 +26,8 @@ public class fProducto {
     public DefaultTableModel mostrar(String buscar){
         DefaultTableModel modelo;
         fcategoria_producto fcateg = new fcategoria_producto();
-        String [] titulos = {"ID", "CATEGORIA", "NOMBRE", "CODIGO", "PRECIO DE VENTA", "LINEA"};
-        String [] registro = new String[6];
+        String [] titulos = {"ID", "CATEGORIA", "NOMBRE", "CODIGO", "PRECIO DE VENTA", "LINEA", "STOCK"};
+        String [] registro = new String[7];
         totalregistros = 0;
         modelo = new DefaultTableModel(null, titulos);
         sSQL = "select * from PRODUCTO where NOMBRE_PRODUCTO like '%" + buscar + "%' order by IDPRODUCTO";
@@ -45,6 +45,7 @@ public class fProducto {
                 registro [3] = rs.getString("CODIGO_PRODUCTO");
                 registro [4] = rs.getString("PRECIO_VENTA_PRODUCTO");
                 registro [5] = rs.getString("LINEA_PRODUCTO");
+                registro [6] = rs.getString("STOCK");
                 
                 totalregistros = totalregistros + 1;
                
@@ -59,8 +60,8 @@ public class fProducto {
     }
     
     public boolean insertar(Producto producto){
-        sSQL = "insert into PRODUCTO (IDCATEGORIA, NOMBRE_PRODUCTO, CODIGO_PRODUCTO, PRECIO_VENTA_PRODUCTO, LINEA_PRODUCTO) "
-                + "values (?,?,?,?,?)";
+        sSQL = "insert into PRODUCTO (IDCATEGORIA, NOMBRE_PRODUCTO, CODIGO_PRODUCTO, PRECIO_VENTA_PRODUCTO, LINEA_PRODUCTO, STOCK) "
+                + "values (?,?,?,?,?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
             pst.setInt(1, producto.getIDCATEGORIA());
@@ -68,6 +69,7 @@ public class fProducto {
             pst.setString(3, producto.getCODIGO_PRODUCTO());
             pst.setInt(4, producto.getPRECIO_VENTA_PRODUCTO());
             pst.setInt(5, producto.getLINEA_PRODUCTO());
+            pst.setInt(6, producto.getSTOCK());
             
             int n = pst.executeUpdate();
             
@@ -130,6 +132,8 @@ public class fProducto {
             return false;
         }
     }
+    
+   
     
     
             

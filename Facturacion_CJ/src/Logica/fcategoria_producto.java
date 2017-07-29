@@ -75,12 +75,12 @@ public class fcategoria_producto {
     }
 
     public int obtenerIdCategoria(String nombreCategoria) {
-        sSQL = "select IDCATEGORIA from CATEGORIA_PRODUCTO where NOMBRECATEGORIA = ? ";
+        sSQL = "select IDCATEGORIA from CATEGORIA_PRODUCTO where NOMBRECATEGORIA = '"+nombreCategoria+"' ";
+        
         int id = 0;
         try {
             PreparedStatement pst = cn.prepareStatement(sSQL);
-            pst.setString(1, nombreCategoria);
-
+//            pst.setString(1, nombreCategoria); 
             ResultSet rs = pst.executeQuery(sSQL);
             rs.next();
             id = rs.getInt("IDCATEGORIA");
