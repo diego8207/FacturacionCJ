@@ -79,6 +79,10 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Pagos"/>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="mnuPagosMouseClicked"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuPagosActionPerformed"/>
+          </Events>
         </Menu>
         <Menu class="javax.swing.JMenu" name="mnuConsultas">
           <Properties>

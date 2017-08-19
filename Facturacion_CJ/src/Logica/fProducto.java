@@ -9,7 +9,9 @@ import Datos.Producto;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -134,7 +136,56 @@ public class fProducto {
     }
     
    
+//    public DefaultComboBoxModel getListaProductos( String cadenaEscrita){
+//        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+//        ResultSet rs;
+//        try {
+//            PreparedStatement pstm = cn.prepareStatement(" SELECT " 
+//            + " NOMBRE_PRODUCTO "
+//            + " FROM PRODUCTO "
+//            + " WHERE NOMBRE_PRODUCTO "
+//            + " LIKE '"+cadenaEscrita+"%'");
+//            rs = (ResultSet) pstm.executeQuery();
+//            
+//            while (rs.next()) {                
+//                modelo.addElement(rs.getString("NOMBRE_PRODUCTO"));
+//            }
+//            
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//        }
+//        return modelo;
+//    }
     
+    public ResultSet getListaProductos( String cadenaEscrita){
+        
+        ResultSet rs = null;
+        try {
+            PreparedStatement pstm = cn.prepareStatement(" SELECT " 
+            + " NOMBRE_PRODUCTO, PRECIO_VENTA_PRODUCTO "
+            + " FROM PRODUCTO "
+            + " WHERE NOMBRE_PRODUCTO "
+            + " LIKE '"+cadenaEscrita+"%'");
+            rs = (ResultSet) pstm.executeQuery();
+            
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
     
+    public ResultSet ConsultarProNombreProducto(String nombreProducto){
+        ResultSet rs = null;
+        try {
+            PreparedStatement ps = cn.prepareStatement("SELECT "
+                    + " CODIGO_PRODUCTO, IDPRODUCTO, STOCK, PRECIO_VENTA_PRODUCTO "
+                    + " FROM PRODUCTO"
+                    + " WHERE NOMBRE_PRODUCTO LIKE '"+nombreProducto+"'");
+            rs = ps.executeQuery();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return rs;
+    }
             
 }

@@ -118,6 +118,16 @@ public class frmInicio extends javax.swing.JFrame {
 
         mnuPagos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Caja registradora-32.png"))); // NOI18N
         mnuPagos.setText("Pagos");
+        mnuPagos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                mnuPagosMouseClicked(evt);
+            }
+        });
+        mnuPagos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuPagosActionPerformed(evt);
+            }
+        });
         menuBar.add(mnuPagos);
 
         mnuConsultas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/Gráfico de barras-32.png"))); // NOI18N
@@ -187,7 +197,7 @@ public class frmInicio extends javax.swing.JFrame {
     }//GEN-LAST:event_mnuProductosActionPerformed
 
     private void MnuSalirMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_MnuSalirMouseClicked
-        this.dispose();
+        System.exit(0);
         
     }//GEN-LAST:event_MnuSalirMouseClicked
 
@@ -202,6 +212,16 @@ public class frmInicio extends javax.swing.JFrame {
         //el metodo hay que sobre escribirlo en este caso en la clase frmProducto
         cliente.setLocked(true);
     }//GEN-LAST:event_mnuClientesActionPerformed
+
+    private void mnuPagosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuPagosActionPerformed
+
+    }//GEN-LAST:event_mnuPagosActionPerformed
+
+    private void mnuPagosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mnuPagosMouseClicked
+        frmFactura f = new frmFactura();
+        centrarVentanaInterna(f);
+        f.setLocked(true);
+    }//GEN-LAST:event_mnuPagosMouseClicked
 
     /**
      * @param args the command line arguments

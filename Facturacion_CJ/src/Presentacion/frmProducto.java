@@ -10,6 +10,7 @@ import Logica.fProducto;
 import Logica.fcategoria_producto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,6 +21,7 @@ public class frmProducto extends javax.swing.JInternalFrame {
 
     public frmProducto() {
         initComponents();
+         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         mostrar("");
         cargarComboCategorias();
         inhablitar();

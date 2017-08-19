@@ -9,7 +9,9 @@ import Datos.Persona;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -84,5 +86,41 @@ public class fPersona {
             JOptionPane.showConfirmDialog(null, e);
             return false;
         }  
+    }
+    
+    
+    public DefaultComboBoxModel getListaClientes(String cadenaEscrita) {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel();
+        ResultSet rs;
+        try { 
+            PreparedStatement pstm = cn.prepareStatement("SELECT "
+                    + " NUMERO_DOCUMENTO, CONCAT(NOMBRE, ' ', APATERNO, ' ', AMATERNO) AS CLIENTE"
+                    + " FROM PERSONA "
+                    + " WHERE NOMBRE "
+                    + " LIKE '" + cadenaEscrita + "%'");
+            rs = (ResultSet) pstm.executeQuery();
+            
+            while (rs.next()) {
+                modelo.addElement(rs.getString("CLIENTE"));
+                System.out.println(rs.getString("CLIENTE"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return modelo;
+    }
+    
+    public ResultSet ConsultarPorNombreCliente(String nomCliente){
+        ResultSet rs = null;
+        try {
+            PreparedStatement ps = cn.prepareStatement("SELECT"
+                    + " DIRECCION, NUMERO_DOCUMENTO, TELEFONO"
+                    + " FROM PERSONA"
+                    + " WHERE CONCAT(NOMBRE, ' ', APATERNO, ' ', AMATERNO) LIKE '"+nomCliente+"'");
+            rs = ps.executeQuery();
+        } catch (SQLException ex) {
+            System.out.println("ERROR AL CONSULTAR EN METODO 'ConsultarPorNombreCliente' en fPersona : " + ex);
+        }
+        return rs;
     }
 }

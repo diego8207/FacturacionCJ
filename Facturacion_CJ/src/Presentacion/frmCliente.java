@@ -8,6 +8,7 @@ package Presentacion;
 import Datos.Cliente;
 import Logica.fCliente;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +22,7 @@ public class frmCliente extends javax.swing.JInternalFrame {
      */
     public frmCliente() {
         initComponents();
+         ((BasicInternalFrameUI) this.getUI()).setNorthPane(null);
         mostrar("");
         inhablitar();
         
